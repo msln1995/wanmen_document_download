@@ -153,12 +153,10 @@ res = response.content;
 课程列表 = json.loads(res) 
 arrData = []
 for item in 课程列表["documents"]:
-    if "." in item["name"]:
+    if item["name"].rfind(".") > 0:
         arrData.append((item["name"], item["url"]))
     else:
-        pos = item["url"].rfind(".")
-        file_type = item["url"][pos:]
-        arrData.append((item["name"] + file_type, item["url"]))
+        arrData.append((item["name"] + "."+ item["ext"], item["url"]))
 
 def url_response(url):
     path,url = url
